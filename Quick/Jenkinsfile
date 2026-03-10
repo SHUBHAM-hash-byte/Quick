@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                // 'dir' command ka use karke hum Jenkins ko 'Quick' folder ke andar bhej rahe hain
+                // Is block ke andar jo bhi likhoge wo Quick folder mein chalega
                 dir('Quick') {
                     sh 'mvn clean compile'
                 }
@@ -22,3 +22,30 @@ pipeline {
         }
     }
 }
+
+
+
+// pipeline {
+//     agent any
+//     tools {
+//         jdk 'Java17'
+//         maven 'Maven3'
+//     }
+//     stages {
+//         stage('Compile') {
+//             steps {
+//                 // 'dir' command ka use karke hum Jenkins ko 'Quick' folder ke andar bhej rahe hain
+//                 dir('Quick') {
+//                     sh 'mvn clean compile'
+//                 }
+//             }
+//         }
+//         stage('Package') {
+//             steps {
+//                 dir('Quick') {
+//                     sh 'mvn package -DskipTests'
+//                 }
+//             }
+//         }
+//     }
+// }
