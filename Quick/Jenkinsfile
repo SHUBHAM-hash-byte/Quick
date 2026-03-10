@@ -7,18 +7,17 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                sh 'mvn clean compile'
+                // 'dir' command ka use karke hum Jenkins ko 'Quick' folder ke andar bhej rahe hain
+                dir('Quick') {
+                    sh 'mvn clean compile'
+                }
             }
         }
         stage('Package') {
             steps {
-                sh 'mvn package -DskipTests'
-            }
-        }
-        stage('Docker Build') {
-            steps {
-                // Image ka naam 'quick-app' rakha hai
-                sh 'docker build -t quick-app:latest .'
+                dir('Quick') {
+                    sh 'mvn package -DskipTests'
+                }
             }
         }
     }
