@@ -87,4 +87,19 @@ public class RegisterService {
         return userMapper.toDto(updateUser);
 
     }
+
+    public UserResponse login(RegisterDto loginDto) {
+        User user=registerRepo.findByEmail(loginDto.getEmail()).
+                orElseThrow(() -> new RuntimeException("wrong cred"));
+
+        if(!passwordEncoder.matches(loginDto.getPassword(),user.getPassword()))
+        {
+            throw new RuntimeException("Invalid user");
+        }
+
+
+         return userMapper.toDto(user);
+
+
+    }
 }

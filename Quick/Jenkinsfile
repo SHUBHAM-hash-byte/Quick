@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    tools {
+        jdk 'Java17'
+        maven 'Maven3'
+    }
+    stages {
+        stage('Compile') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+        stage('Package') {
+            steps {
+                sh 'mvn package -DskipTests'
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                // Image ka naam 'quick-app' rakha hai
+                sh 'docker build -t quick-app:latest .'
+            }
+        }
+    }
+}

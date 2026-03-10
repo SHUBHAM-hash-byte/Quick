@@ -30,7 +30,7 @@ public class SecurityConfig {
 
         httpSecurity
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests((authorize) -> authorize.requestMatchers("/auth/**", "/auth/hello","/h2-console/**")
+                .authorizeHttpRequests((authorize) -> authorize.requestMatchers("/auth/**", "/auth/hello","/auth/login","/h2-console/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
